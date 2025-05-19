@@ -8,449 +8,18 @@
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    <style>
-    body {
-        font-family: 'Segoe UI', Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f0f0f0;
-        color: #333;
-    }
-    
-    .container {
-        display: flex;
-        flex-direction: row;
-        height: 100vh;
-        width: 100%;
-    }
-    
-    .left-panel {
-        width: 65%;
-        display: flex;
-        flex-direction: column;
-        background-color: #fff;
-        box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-    }
-    
-    .right-panel {
-        width: 35%;
-        display: flex;
-        flex-direction: column;
-        background-color: #ebebeb;
-    }
-    
-    .header {
-        background-color: #0078d7;
-        color: white;
-        padding: 10px 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .store-info {
-        font-size: 1.2em;
-    }
-    
-    .datetime {
-        font-size: 0.9em;
-    }
-    
-    .cart-container {
-        flex-grow: 1;
-        overflow-y: auto;
-        padding: 10px;
-    }
-    
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-    
-    th, td {
-        padding: 10px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-    }
-    
-    th {
-        background-color: #f2f2f2;
-    }
-    
-    .total-row {
-        font-weight: bold;
-        background-color: #e6e6e6;
-    }
-    
-    .keypad {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 5px;
-        padding: 10px;
-    }
-    
-    .btn {
-        padding: 15px;
-        font-size: 1.1em;
-        border: none;
-        background-color: #fff;
-        cursor: pointer;
-        border-radius: 3px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    
-    .btn:hover {
-        background-color: #e6e6e6;
-    }
-    
-    .btn-func {
-        background-color: #0078d7;
-        color: white;
-    }
-    
-    .btn-func:hover {
-        background-color: #006abc;
-    }
-    
-    .btn-danger {
-        background-color: #d9534f;
-        color: white;
-    }
-    
-    .btn-danger:hover {
-        background-color: #c9302c;
-    }
-    
-    .btn-success {
-        background-color: #5cb85c;
-        color: white;
-    }
-    
-    .btn-success:hover {
-        background-color: #4cae4c;
-    }
-    
-    .input-display {
-        background-color: #fff;
-        padding: 10px;
-        font-size: 1.5em;
-        text-align: right;
-        margin-bottom: 10px;
-        border: 1px solid #ddd;
-    }
-    
-    .function-buttons {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 5px;
-        padding: 10px;
-        background-color: #f8f8f8;
-    }
-    
-    .total-display {
-        background-color: #333;
-        color: white;
-        padding: 15px;
-        text-align: right;
-        font-size: 1.5em;
-    }
-    
-    .products-panel {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 8px;
-        padding: 10px;
-        overflow-y: auto;
-        max-height: 300px;
-    }
-    
-    .product-btn {
-        padding: 15px 10px;
-        text-align: center;
-        background-color: #f8f8f8;
-        border: 1px solid #ddd;
-        cursor: pointer;
-        border-radius: 3px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 70px;
-    }
-    
-    .product-btn:hover {
-        background-color: #e8e8e8;
-    }
-    
-    .product-name {
-        font-weight: bold;
-        margin-bottom: 5px;
-    }
-    
-    .product-price {
-        color: #d9534f;
-    }
-    
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0,0,0,0.4);
-    }
-    
-    .modal-content {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: #fefefe;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
-        max-width: 800px;
-        border-radius: 5px;
-    }
-    
-    .payment-options {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-top: 20px;
-    }
-    
-    .payment-btn {
-        padding: 15px;
-        font-size: 1.2em;
-        border: none;
-        cursor: pointer;
-        border-radius: 3px;
-    }
-    
-    .close-btn {
-        background-color: #d9534f;
-        color: white;
-    }
-    
-    .receipt {
-        background-color: white;
-        width: 100%;
-        max-width: 300px;
-        margin: 20px auto;
-        padding: 20px;
-        font-family: 'Courier New', monospace;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    .message-box {
-        background-color: #fff3cd;
-        border: 1px solid #ffeeba;
-        color: #856404;
-        padding: 10px;
-        margin: 10px;
-        border-radius: 3px;
-        text-align: center;
-        display: none;
-    }
-
-    .payment-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
-        padding: 10px;
-    }
-    
-    .payment-method-btn {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 15px;
-        font-size: 1.1em;
-        border: none;
-        cursor: pointer;
-        border-radius: 5px;
-        color: white;
-    }
-    
-    .payment-method-btn img {
-        width: 48px;
-        height: 48px;
-        margin-bottom: 5px;
-    }
-    
-    .payment-method-btn:hover {
-        opacity: 0.9;
-    }
-    
-    .credit-btn { background-color: #0078d7; }
-    .quicpay-btn { background-color: #ff4500; }
-    .id-btn { background-color: #1e90ff; }
-    .ic-btn { background-color: #228b22; }
-    .waon-btn { background-color: #ff69b4; }
-    .pitapa-btn { background-color: #6a5acd; }
-    
-    .touch-screen {
-        display: none;
-        text-align: center;
-        padding: 20px;
-    }
-    
-    .touch-area {
-        width: 200px;
-        height: 200px;
-        margin: 20px auto;
-        background-color: #ddd;
-        border-radius: 10px;
-        position: relative;
-        overflow: hidden;
-        cursor: pointer;
-    }
-    
-    .touch-area:hover {
-        background-color: #ccc;
-    }
-    
-    .ripple {
-        position: absolute;
-        background: rgba(0, 120, 215, 0.5);
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
-        animation: ripple 0.6s linear;
-        pointer-events: none;
-    }
-    
-    @keyframes ripple {
-        0% { transform: scale(0); opacity: 1; }
-        100% { transform: scale(4); opacity: 0; }
-    }
-
-    /* スマートフォン対応のためのメディアクエリ */
-    @media screen and (max-width: 768px) {
-        .container {
-            flex-direction: column;
-            height: auto;
-            min-height: 100vh;
-        }
-        
-        .left-panel, .right-panel {
-            width: 100%;
-        }
-        
-        .products-panel {
-            grid-template-columns: repeat(2, 1fr);
-            min-height: 200px;
-        }
-        
-        .header {
-            flex-direction: column;
-            padding: 10px;
-        }
-        
-        .store-info, .datetime {
-            text-align: center;
-            margin-bottom: 5px;
-        }
-        
-        .function-buttons {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 5px;
-        }
-        
-        .btn {
-            padding: 12px;
-            font-size: 1em;
-        }
-        
-        table {
-            font-size: 0.9em;
-        }
-        
-        th, td {
-            padding: 8px 5px;
-        }
-        
-        .modal-content {
-            width: 95%;
-            padding: 15px;
-        }
-        
-        .payment-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-        
-        .payment-method-btn {
-            font-size: 0.9em;
-        }
-        
-        .payment-method-btn img {
-            width: 36px;
-            height: 36px;
-        }
-        
-        .touch-area {
-            width: 150px;
-            height: 150px;
-        }
-    }
-    
-    /* さらに小さい画面（スマートフォン縦向き）用 */
-    @media screen and (max-width: 480px) {
-        .products-panel {
-            grid-template-columns: 1fr;;
-        }
-        
-        .keypad {
-            grid-template-columns: repeat(4, 1fr);
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 95%;
-            z-index: 1000;
-            display: none;
-        }
-        
-        .cart-container {
-            overflow-x: auto;
-            max-height: 200px;;
-            
-        }
-        
-        table {
-            font-size: 0.8em;
-            min-width: 450px; /* 横スクロールを可能にするため */
-        }
-        
-        .payment-grid {
-            grid-template-columns: 1fr;
-        }
-        
-        .function-buttons {
-            grid-template-columns: 1fr;
-        }
-        #manual-entry-btn{
-            display: none;
-        }
-        #discount-btn{
-            display: none;
-        }
-    }
-</style>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
     <div class="container">
         <div class="left-panel">
             <div class="header">
                 <div class="store-info">Salmon POSレジ システム</div>
+                <div class="user-info">[システム異常]エラー:0000</div>
+                <div class="error-message" id="error-message"></div>
                 <div class="datetime" id="datetime">0000-00-00 00:00:00</div>
             </div>
-            
             <div class="cart-container">
                 <table id="cart-table">
                     <thead>
@@ -472,42 +41,34 @@
                     </tfoot>
                 </table>
             </div>
-            
             <div class="message-box" id="message-box"></div>
-            
             <div class="function-buttons">
                 <button class="btn btn-func" id="payment-btn">会計[Ctrl]</button>
                 <button class="btn btn-danger" id="clear-cart-btn">一括取消[Del]</button>
                 <button class="btn" id="remove-last-btn">取消[BS]</button>
-                <button class="btn" id="discount-btn">割引[-]</button>
-                <button class="btn" id="manual-entry-btn">登録モード切替[Space]</button>
+                <button class="btn" id="manual-entry-btn">モード切替[Space]</button>
+                <button class="btn" id="logoff-btn">責番解除[→]</button>
+                <button class="btn btn-func" id="settlement-btn">精算</button>
             </div>
         </div>
-        
         <div class="right-panel">
             <div class="total-display" id="total-display">¥0</div>
-            
             <div class="input-display" id="input-display"></div>
-            
             <div class="products-panel" id="products-panel">
             </div>
-            
             <div class="keypad">
                 <button class="btn" id="btn-7">7</button>
                 <button class="btn" id="btn-8">8</button>
                 <button class="btn" id="btn-9">9</button>
                 <button class="btn btn-func" id="quantity-btn">数量</button>
-                
                 <button class="btn" id="btn-4">4</button>
                 <button class="btn" id="btn-5">5</button>
                 <button class="btn" id="btn-6">6</button>
                 <button class="btn btn-func" id="search-btn">検索</button>
-                
                 <button class="btn" id="btn-1">1</button>
                 <button class="btn" id="btn-2">2</button>
                 <button class="btn" id="btn-3">3</button>
-                <button class="btn btn-func" id="confirm-btn">確定</button>
-                
+                <button class="btn btn-func" id="discount-btn">割引</button>
                 <button class="btn" id="btn-0">0</button>
                 <button class="btn" id="btn-00">00</button>
                 <button class="btn btn-danger" id="clear-btn">C</button>
@@ -515,502 +76,153 @@
             </div>
         </div>
     </div>
-    
     <div id="payment-modal" class="modal">
         <div class="modal-content">
-            <h2>お会計</h2>
-            <p>合計金額: <span id="payment-total">¥0</span></p>
-            <div class="payment-grid" id="payment-methods">
-                <button class="payment-method-btn credit-btn" data-method="Credit">
-                    <img src="images/contactless.png" alt="Credit">
-                    クレジット
-                </button>
-                <button class="payment-method-btn quicpay-btn" data-method="QUICPay">
-                    <img src="images/QUICPay.png" alt="QUICPay">
-                    QUICPay
-                </button>
-                <button class="payment-method-btn id-btn" data-method="iD">
-                    <img src="images/iD.png" alt="iD">
-                    iD
-                </button>
-                <button class="payment-method-btn ic-btn" data-method="IC">
-                    <img src="images/TransportationIC.jpg" alt="IC">
-                    交通系IC
-                </button>
-                <button class="payment-method-btn waon-btn" data-method="WAON">
-                    <img src="images/waon.png" alt="WAON">
-                    WAON
-                </button>
-                <button class="payment-method-btn pitapa-btn" data-method="PiTaPa">
-                    <img src="images/pitapa.png" alt="PiTaPa">
-                    PiTaPa
-                </button>
+            <h2>お支払い</h2>
+            <p>合計: <span id="payment-total"></span></p>
+            <div id="initial-options">
+                <div id="payment-methods" class="payment-grid">
+                    <button class="payment-method-btn cash-btn" data-method="Cash">
+                        <img src="images/money.png" alt="Cash">
+                        現金
+                    </button>
+                    <button class="payment-method-btn credit-btn" data-method="Credit">
+                        <img src="images/contactless.png" alt="Credit">
+                        クレジット
+                    </button>
+                    <button class="payment-method-btn quicpay-btn" data-method="QUICPay">
+                        <img src="images/quicpay.png" alt="QUICPay">
+                        QUICPay
+                    </button>
+                    <button class="payment-method-btn id-btn" data-method="iD">
+                        <img src="images/id.png" alt="iD">
+                        iD
+                    </button>
+                    <button class="payment-method-btn ic-btn" data-method="IC">
+                        <img src="images/TransportationIC.jpg" alt="IC">
+                        交通系IC
+                    </button>
+                    <button class="payment-method-btn waon-btn" data-method="WAON">
+                        <img src="images/waon.png" alt="WAON">
+                        WAON
+                    </button>
+                    <button class="payment-method-btn pitapa-btn" data-method="PiTaPa">
+                        <img src="images/pitapa.png" alt="PiTaPa">
+                        PiTaPa
+                    </button>
+                </div>
             </div>
-            <div class="touch-screen" id="touch-screen">
-                <p>決済: <span id="touch-method"></span> / <span id="touch-amount"></span></p>
-                <p>タッチしてください</p>
+            <div id="touch-screen">
+                <p>支払方法: <span id="touch-method"></span></p>
+                <p>金額: <span id="touch-amount"></span></p>
                 <div class="touch-area" id="touch-area"></div>
-                <button class="payment-btn close-btn" id="cancel-touch-btn">キャンセル</button>
+                <button class="btn btn-danger" id="cancel-touch-btn">キャンセル</button>
             </div>
-            <div class="payment-options" id="initial-options">
-                <button class="payment-btn close-btn" id="cancel-payment-btn">キャンセル[ESC]</button>
+            <div class="button-container">
+                <button class="btn btn-danger" id="cancel-payment-btn">閉じる</button>
             </div>
         </div>
     </div>
-    
     <div id="receipt-modal" class="modal">
         <div class="modal-content">
             <div class="receipt" id="receipt-content">
                 <h3 style="text-align: center;">Salmonストア</h3>
                 <p style="text-align: center;">レシート</p>
                 <p id="receipt-datetime"></p>
+                <p id="casher-user"></p>
                 <hr>
                 <div id="receipt-items"></div>
-                <hr>
                 <p style="text-align: right;">合計: <span id="receipt-total"></span></p>
                 <p style="text-align: right;">支払方法: <span id="receipt-payment-method"></span></p>
+                <hr>
+                <div id="payment-details"></div>
                 <p style="text-align: center;">ご利用ありがとうございました</p>
             </div>
-            <div style="text-align: center; margin-top: 20px;">
+            <div class="button-container">
                 <button class="btn btn-func" id="close-receipt-btn">閉じる</button>
                 <button class="btn btn-success" id="print-receipt-btn">印刷</button>
             </div>
         </div>
     </div>
-
-    <script>
-        const products = [
-    { id: '2001', name: '冷凍ブロッコリー 500g', price: 158 },
-    { id: '2002', name: '冷凍唐揚げ 1kg', price: 698 },
-    { id: '2003', name: 'ベルギーワッフル（10個入）', price: 348 },
-    { id: '2004', name: 'チーズインハンバーグ 1kg', price: 598 },
-    { id: '2005', name: 'スパゲッティ 1.5kg', price: 298 },
-    { id: '2006', name: 'ミートソース缶 680g', price: 158 },
-    { id: '2007', name: 'ブラジル産鶏もも肉 2kg', price: 980 },
-    { id: '2008', name: '冷凍讃岐うどん（5食入）', price: 178 },
-    { id: '2009', name: 'タピオカミルクティー（4食入）', price: 348 },
-    { id: '2010', name: '業務用マヨネーズ 1kg', price: 298 },
-    { id: '2011', name: 'フライドポテト 1kg', price: 198 },
-    { id: '2012', name: '冷凍エビピラフ 1kg', price: 368 },
-    { id: '2013', name: '冷凍カットほうれん草 500g', price: 158 },
-    { id: '2014', name: '冷凍焼きおにぎり（6個入）', price: 298 },
-    { id: '2015', name: '業務用ウインナー 1kg', price: 498 },
-    { id: '2016', name: '冷凍たこ焼き（30個入）', price: 398 },
-    { id: '2017', name: '業務用ケチャップ 1kg', price: 218 },
-    { id: '2018', name: '冷凍フルーツミックス 500g', price: 358 },
-    { id: '2019', name: '冷凍コロッケ（10個入）', price: 278 },
-    { id: '2020', name: '冷凍味噌ラーメン（2食入）', price: 248 },
-    { id: '2021', name: 'チキンナゲット 1kg', price: 498 },
-    { id: '2022', name: '冷凍グラタン（4食入）', price: 398 },
-    { id: '2023', name: '業務用ホイップクリーム 1L', price: 398 },
-    { id: '2024', name: '冷凍カスタードプリン（6個入）', price: 328 },
-    { id: '2025', name: 'ナポリタンソース 600g', price: 198 },
-    { id: '2026', name: '冷凍焼売（30個入）', price: 458 },
-    { id: '2027', name: '冷凍ピザ（2枚入）', price: 498 },
-    { id: '2028', name: '冷凍オムライス（2食入）', price: 348 },
-    { id: '2029', name: '業務用サラダ油 1.5L', price: 368 },
-    { id: '2030', name: '冷凍ホタテ貝柱 500g', price: 980 },
-    { id: '2031', name: '冷凍春巻き（20本入）', price: 398 },
-    { id: '2032', name: '冷凍チーズケーキ（カット済6個）', price: 428 }
-];
-
-        
-        let cart = [];
-        let inputValue = '';
-        let currentQuantity = 1;
-        let manualEntryMode = false;
-        let lastAddedProduct = null;
-        
-        const inputDisplay = document.getElementById('input-display') || console.error('input-display not found');
-        const cartItems = document.getElementById('cart-items') || console.error('cart-items not found');
-        const cartTotal = document.getElementById('cart-total') || console.error('cart-total not found');
-        const totalDisplay = document.getElementById('total-display') || console.error('total-display not found');
-        const productsPanel = document.getElementById('products-panel') || console.error('products-panel not found');
-        const messageBox = document.getElementById('message-box') || console.error('message-box not found');
-        const paymentModal = document.getElementById('payment-modal') || console.error('payment-modal not found');
-        const receiptModal = document.getElementById('receipt-modal') || console.error('receipt-modal not found');
-        const paymentTotal = document.getElementById('payment-total') || console.error('payment-total not found');
-        const receiptItems = document.getElementById('receipt-items') || console.error('receipt-items not found');
-        const receiptTotal = document.getElementById('receipt-total') || console.error('receipt-total not found');
-        const receiptPaymentMethod = document.getElementById('receipt-payment-method') || console.error('receipt-payment-method not found');
-        const receiptDateTime = document.getElementById('receipt-datetime') || console.error('receipt-datetime not found');
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            updateDateTime();
-            setInterval(updateDateTime, 1000);
-            loadProducts();
-            setupEventListeners();
-        });
-        
-        function setupEventListeners() {
-            document.getElementById('btn-0').addEventListener('click', () => appendToInput('0'));
-            document.getElementById('btn-1').addEventListener('click', () => appendToInput('1'));
-            document.getElementById('btn-2').addEventListener('click', () => appendToInput('2'));
-            document.getElementById('btn-3').addEventListener('click', () => appendToInput('3'));
-            document.getElementById('btn-4').addEventListener('click', () => appendToInput('4'));
-            document.getElementById('btn-5').addEventListener('click', () => appendToInput('5'));
-            document.getElementById('btn-6').addEventListener('click', () => appendToInput('6'));
-            document.getElementById('btn-7').addEventListener('click', () => appendToInput('7'));
-            document.getElementById('btn-8').addEventListener('click', () => appendToInput('8'));
-            document.getElementById('btn-9').addEventListener('click', () => appendToInput('9'));
-            document.getElementById('btn-00').addEventListener('click', () => appendToInput('00'));
-            
-            document.getElementById('clear-btn').addEventListener('click', clearInput);
-            document.getElementById('quantity-btn').addEventListener('click', setQuantity);
-            document.getElementById('search-btn').addEventListener('click', searchProduct);
-            document.getElementById('confirm-btn').addEventListener('click', addProductByCode);
-            document.getElementById('enter-btn').addEventListener('click', enterProduct);
-            
-            document.getElementById('payment-btn').addEventListener('click', openPaymentModal);
-            document.getElementById('clear-cart-btn').addEventListener('click', clearCart);
-            document.getElementById('remove-last-btn').addEventListener('click', removeLastItem);
-            document.getElementById('discount-btn').addEventListener('click', addDiscount);
-            document.getElementById('manual-entry-btn').addEventListener('click', switchToManualEntry);
-            
-            document.getElementById('close-receipt-btn').addEventListener('click', closeReceiptModal);
-            document.getElementById('print-receipt-btn').addEventListener('click', printReceipt);
-            
-            document.getElementById('cancel-payment-btn').addEventListener('click', closePaymentModal);
-            document.getElementById('cancel-touch-btn').addEventListener('click', () => {
-                document.getElementById('touch-screen').style.display = 'none';
-                document.getElementById('payment-methods').style.display = 'grid';
-                document.getElementById('initial-options').style.display = 'block';
-            });
-            document.querySelectorAll('.payment-method-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const method = btn.dataset.method;
-                    const total = cart.reduce((sum, item) => sum + item.amount, 0);
-                    showTouchScreen(method, total);
-                });
-            });
-            document.getElementById('touch-area').addEventListener('click', (e) => {
-                const touchArea = document.getElementById('touch-area');
-                const rect = touchArea.getBoundingClientRect();
-                const x = e.clientX - rect.left - 25;
-                const y = e.clientY - rect.top - 25;
-                const ripple = document.createElement('div');
-                ripple.className = 'ripple';
-                ripple.style.left = `${x}px`;
-                ripple.style.top = `${y}px`;
-                touchArea.appendChild(ripple);
-                setTimeout(() => ripple.remove(), 600);
-                const method = document.getElementById('touch-method').textContent;
-                completePayment(method);
-            });
-
-            document.addEventListener('keydown', handleKeydown);
-        }
-        
-        function handleKeydown(event) {
-            const key = event.key;
-            console.log(key);
-            if (["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"].includes(key)) {
-                appendToInput(key);
-                event.preventDefault();
-            }
-            else if (key === "Enter") {
-                if (inputValue) {
-                    enterProduct();
-                } else if (lastAddedProduct) {
-                    addToCart(lastAddedProduct);
-                }
-                event.preventDefault();
-            }
-            else if (key === "*") {
-                setQuantity();
-                event.preventDefault();
-            }
-            else if (key === "Backspace") {
-                removeLastItem();
-                event.preventDefault();
-            }
-            else if (key === "Delete") {
-                clearCart();
-                event.preventDefault();
-            }
-            else if (key === "-"){
-                addDiscount();
-                event.preventDefault();
-            }
-            else if (key === "/") {
-                searchProduct();
-                event.preventDefault();
-            }
-            else if (key === "Escape") {
-                closePaymentModal();
-                event.preventDefault();
-            }
-            else if(key===" "){
-                switchToManualEntry();
-                event.preventDefault();
-            }
-            else if(key==="Control"){
-                openPaymentModal();
-                event.preventDefault();
-            }
-        }
-
-        function updateDateTime() {
-            const now = new Date();
-            const dateTimeString = now.toLocaleString('ja-JP');
-            document.getElementById('datetime').textContent = dateTimeString;
-        }
-        
-        function loadProducts() {
-            productsPanel.innerHTML = '';
-            products.forEach(product => {
-                const productBtn = document.createElement('div');
-                productBtn.className = 'product-btn';
-                productBtn.innerHTML = `
-                    <div class="product-name">${product.name}</div>
-                    <div class="product-price">¥${product.price}</div>
-                `;
-                productBtn.addEventListener('click', () => addToCart(product));
-                productsPanel.appendChild(productBtn);
-            });
-        }
-        
-        function updateInputDisplay() {
-            inputDisplay.textContent = inputValue;
-        }
-        
-        function appendToInput(value) {
-            inputValue += value;
-            updateInputDisplay();
-        }
-        
-        function clearInput() {
-            inputValue = '';
-            updateInputDisplay();
-        }
-        
-        function setQuantity() {
-            if (inputValue) {
-                currentQuantity = parseInt(inputValue);
-                showMessage(`数量: ${currentQuantity}`);
-                clearInput();
-            }
-        }
-        
-        function searchProduct() {
-            if (!inputValue) return;
-            const product = products.find(p => p.id === inputValue);
-            if (product) {
-                showMessage(`${product.name}: ¥${product.price}`);
-            } else {
-                showMessage('商品が見つかりません');
-            }
-            clearInput();
-        }
-        
-        function addProductByCode() {
-            if (!inputValue) return;
-            const product = products.find(p => p.id === inputValue);
-            if (product) {
-                addToCart(product);
-                clearInput();
-            } else {
-                showMessage('商品が見つかりません');
-                clearInput();
-            }
-        }
-        
-        function enterProduct() {
-            if (manualEntryMode && inputValue) {
-                const customPrice = parseInt(inputValue);
-                const customProduct = {
-                    id: `custom-${Date.now()}`,
-                    name: '商品登録',
-                    price: customPrice
-                };
-                addToCart(customProduct);
-                clearInput();
-            } else {
-                addProductByCode();
-            }
-        }
-        
-        function switchToManualEntry() {
-            manualEntryMode = !manualEntryMode;
-            if (manualEntryMode) {
-                showMessage('金額入力モード');
-            } else {
-                showMessage('通常モード');
-            }
-        }
-        
-        function addToCart(product) {
-            const quantity = currentQuantity || 1;
-            const amount = product.price * quantity;
-            const existingItem = cart.find(item => item.id === product.id);
-            
-            if (existingItem) {
-                existingItem.quantity += quantity;
-                existingItem.amount += amount;
-            } else {
-                cart.push({
-                    id: product.id,
-                    name: product.name,
-                    price: product.price,
-                    quantity: quantity,
-                    amount: amount
-                });
-            }
-            
-            lastAddedProduct = product;
-            updateCart();
-            currentQuantity = 1;
-        }
-        
-        function updateCart() {
-            cartItems.innerHTML = '';
-            let total = 0;
-            cart.forEach((item, index) => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${index + 1}</td>
-                    <td>${item.name}</td>
-                    <td>¥${item.price}</td>
-                    <td>${item.quantity}</td>
-                    <td>¥${item.amount}</td>
-                `;
-                cartItems.appendChild(row);
-                total += item.amount;
-            });
-            cartTotal.textContent = `¥${total}`;
-            totalDisplay.textContent = `¥${total}`;
-        }
-        
-        function clearCart() {
-            cart = [];
-            lastAddedProduct = null;
-            updateCart();
-        }
-        
-        function removeLastItem() {
-            if (cart.length > 0) {
-                cart.pop();
-                updateCart();
-            }
-        }
-        
-        function addDiscount() {
-            if (inputValue) {
-                const discountAmount = parseInt(inputValue);
-                const discountItem = {
-                    id: 'discount',
-                    name: '割引',
-                    price: -discountAmount,
-                    quantity: 1,
-                    amount: -discountAmount
-                };
-                cart.push(discountItem);
-                updateCart();
-                clearInput();
-            } else {
-                showMessage('割引額を入力してください');
-            }
-        }
-        
-        function showMessage(message) {
-            messageBox.textContent = message;
-            messageBox.style.display = 'block';
-            setTimeout(() => {
-                messageBox.style.display = 'none';
-            }, 3000);
-        }
-        
-        function openPaymentModal() {
-            if (cart.length === 0) {
-                showMessage('商品がありません');
-                return;
-            }
-            let total = 0;
-            cart.forEach(item => {
-                total += item.amount;
-            });
-            paymentTotal.textContent = `¥${total}`;
-            paymentModal.style.display = 'block';
-            document.getElementById('payment-methods').style.display = 'grid';
-            document.getElementById('initial-options').style.display = 'block';
-            document.getElementById('touch-screen').style.display = 'none';
-        }
-        
-        function closePaymentModal() {
-            paymentModal.style.display = 'none';
-        }
-        
-        function processPayment(method) {
-            let total = 0;
-            cart.forEach(item => {
-                total += item.amount;
-            });
-            receiptDateTime.textContent = new Date().toLocaleString('ja-JP');
-            receiptItems.innerHTML = '';
-            cart.forEach(item => {
-                const itemLine = document.createElement('p');
-                itemLine.innerHTML = `${item.name} x ${item.quantity} <span style="float: right;">¥${item.amount}</span>`;
-                receiptItems.appendChild(itemLine);
-            });
-            receiptTotal.textContent = `¥${total}`;
-            receiptPaymentMethod.textContent = method;
-            closePaymentModal();
-            receiptModal.style.display = 'block';
-            clearCart();
-        }
-        
-        function closeReceiptModal() {
-            receiptModal.style.display = 'none';
-        }
-        
-        function printReceipt() {
-            const receiptContent = document.getElementById('receipt-content').innerHTML;
-            const printWindow = window.open('', '_blank');
-            printWindow.document.write(`
-                <html>
-                <head>
-                    <title>レシート印刷</title>
-                    <style>
-                        body {
-                            font-family: 'Courier New', monospace;
-                            width: 300px;
-                            margin: 0 auto;
-                        }
-                    </style>
-                </head>
-                <body>
-                    ${receiptContent}
-                </body>
-                </html>
-            `);
-            printWindow.document.close();
-            printWindow.focus();
-            printWindow.print();
-            printWindow.close();
-        }
-
-        function showTouchScreen(method, total) {
-            document.getElementById('payment-methods').style.display = 'none';
-            document.getElementById('initial-options').style.display = 'none';
-            document.getElementById('touch-screen').style.display = 'block';
-            document.getElementById('touch-method').textContent = method;
-            document.getElementById('touch-amount').textContent = `¥${total}`;
-        }
-
-        function completePayment(method) {
-            const soundMap = {
-                'Credit': 'sound/credit.mp3',
-                'QUICPay': 'sound/quicpay.mp3',
-                'iD': 'sound/iD.wav',
-                'IC': 'sound/transportationic.mp3',
-                'WAON': 'sound/waon.mp3',
-                'PiTaPa': 'sound/pitapa.mp3'
-            };
-            const soundFile = soundMap[method];
-            const audio = new Audio(soundFile);
-            audio.play().catch(() => console.log(`Sound playback failed: ${soundFile}`));
-            processPayment(method);
-        }
-    </script>
+    <div id="logon-modal" class="modal">
+        <div class="modal-content">
+            <h2>責任者ログイン</h2>
+            <p>責任者番号を入力してください</p>
+            <div class="input-display" id="logon-input-display"></div>
+            <div class="keypad">
+                <button class="btn" id="logon-btn-7">7</button>
+                <button class="btn" id="logon-btn-8">8</button>
+                <button class="btn" id="logon-btn-9">9</button>
+                <button class="btn btn-func" id="logon-brank">　　</button>
+                <button class="btn" id="logon-btn-4">4</button>
+                <button class="btn" id="logon-btn-5">5</button>
+                <button class="btn" id="logon-btn-6">6</button>
+                <button class="btn btn-func" id="logon-brank2">　　</button>
+                <button class="btn" id="logon-btn-1">1</button>
+                <button class="btn" id="logon-btn-2">2</button>
+                <button class="btn" id="logon-btn-3">3</button>
+                <button class="btn btn-func" id="logon-brank3">　　</button>
+                <button class="btn" id="logon-btn-0">0</button>
+                <button class="btn" id="logon-btn-00">00</button>
+                <button class="btn btn-danger" id="logon-clear-btn">C</button>
+                <button class="btn btn-success" id="logon-enter-btn">登録</button>
+            </div>
+        </div>
+    </div>
+    <div id="cash-payment-modal" class="modal">
+        <div class="modal-content">
+            <h2>現金払い</h2>
+            <div class="cash-payment-info">
+                <p>お会計金額: <span id="cash-payment-total">¥0</span></p>
+                <p>預かり金額: <span id="cash-deposit-amount">¥0</span></p>
+                <p id="cash-change-amount" style="display: none;">お釣り: <span id="cash-change-value">¥0</span></p>
+            </div>
+            <div class="input-display" id="cash-input-display" tabindex="0">0</div>
+            <div class="keypad">
+                <button class="btn" id="cash-btn-7">7</button>
+                <button class="btn" id="cash-btn-8">8</button>
+                <button class="btn" id="cash-btn-9">9</button>
+                <button class="btn btn-func" id="cash-amount-btn">金額</button>
+                <button class="btn" id="cash-btn-4">4</button>
+                <button class="btn" id="cash-btn-5">5</button>
+                <button class="btn" id="cash-btn-6">6</button>
+                <button class="btn btn-func" id="cash-brank1">　</button>
+                <button class="btn" id="cash-btn-1">1</button>
+                <button class="btn" id="cash-btn-2">2</button>
+                <button class="btn" id="cash-btn-3">3</button>
+                <button class="btn btn-func" id="cash-brank2">　</button>
+                <button class="btn" id="cash-btn-0">0</button>
+                <button class="btn" id="cash-btn-00">00</button>
+                <button class="btn btn-danger" id="cash-clear-btn">C</button>
+                <button class="btn btn-success" id="cash-subtotal-btn">小計</button>
+            </div>
+            <div class="button-container">
+                <button class="btn btn-danger" id="cancel-cash-btn">閉じる</button>
+            </div>
+        </div>
+    </div>
+    <div id="settlement-modal" class="modal">
+    <div class="modal-content">
+        <h2>精算処理</h2>
+        <p>総会計額: <span id="settlement-total">¥0</span></p>
+        <p>預かり金額: <span id="settlement-deposit">¥0</span></p>
+        <div class="button-container">
+            <button class="btn btn-success" id="settlement-confirm-btn">確認</button>
+            <button class="btn btn-danger" id="settlement-cancel-btn">キャンセル</button>
+        </div>
+    </div>
+</div>
+<div id="settlement-confirm-modal" class="modal">
+    <div class="modal-content">
+        <h2>精算確認</h2>
+        <p>以下の内容で精算しますか？</p>
+        <p>総会計額: <span id="settlement-confirm-total">¥0</span></p>
+        <p>預かり金額: <span id="settlement-confirm-deposit">¥0</span></p>
+        <div class="button-container">
+            <button class="btn btn-success" id="settlement-execute-btn">精算</button>
+            <button class="btn btn-danger" id="settlement-confirm-cancel-btn">キャンセル</button>
+        </div>
+    </div>
+</div>
 </body>
 </html>

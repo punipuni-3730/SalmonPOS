@@ -1,0 +1,746 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: 100%;
+}
+
+.left-panel {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+
+.right-panel {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    background-color: #ebebeb;
+}
+
+.header {
+    background-color: #0078d7;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.store-info {
+    font-size: 1.2em;
+}
+
+.datetime {
+    font-size: 0.9em;
+}
+
+.cart-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.total-row {
+    font-weight: bold;
+    background-color: #e6e6e6;
+}
+
+.keypad {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+    padding: 10px;
+}
+
+.btn {
+    padding: 15px;
+    font-size: 1.1em;
+    border: none;
+    background-color: #fff;
+    cursor: pointer;
+    border-radius: 3px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.btn:hover {
+    background-color: #e6e6e6;
+}
+
+.btn-func {
+    background-color: #0078d7;
+    color: white;
+}
+
+.btn-func:hover {
+    background-color: #006abc;
+}
+
+.btn-danger {
+    background-color: #d9534f;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c9302c;
+}
+
+.btn-success {
+    background-color: #5cb85c;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #4cae4c;
+}
+
+.input-display {
+    background-color: #fff;
+    padding: 10px;
+    font-size: 1.5em;
+    text-align: right;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    height: 32px;
+}
+
+.function-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 10px;
+    background-color: #f8f8f8;
+}
+
+.total-display {
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    text-align: right;
+    font-size: 1.5em;
+}
+
+.products-panel {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding: 10px;
+    overflow-y: auto;
+    max-height: 300px;
+}
+
+.product-btn {
+    padding: 15px 10px;
+    text-align: center;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 70px;
+}
+
+.product-btn:hover {
+    background-color: #e8e8e8;
+}
+
+.product-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.product-price {
+    color: #d9534f;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 800px;
+    border-radius: 5px;
+}
+
+.payment-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.payment-btn {
+    padding: 15px;
+    font-size: 1.2em;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.close-btn {
+    background-color: #d9534f;
+    color: white;
+}
+
+.receipt {
+    background-color: white;
+    width: 100%;
+    max-width: 300px;
+    margin: 20px auto;
+    padding: 20px;
+    font-family: 'Courier New', monospace;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.message-box {
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 3px;
+    text-align: center;
+    display: none;
+}
+
+.payment-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 10px;
+}
+
+.payment-method-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    font-size: 1.1em;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
+}
+
+.payment-method-btn img {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 5px;
+}
+
+.payment-method-btn:hover {
+    opacity: 0.9;
+}
+
+.cash-btn { background-color: #28a745; }
+.credit-btn { background-color: #0078d7; }
+.quicpay-btn { background-color: #ff4500; }
+.id-btn { background-color: #1e90ff; }
+.ic-btn { background-color: #228b22; }
+.waon-btn { background-color: #ff69b4; }
+.pitapa-btn { background-color: #6a5acd; }
+
+.touch-screen {
+    display: none;
+    text-align: center;
+    padding: 20px;
+}
+
+.touch-area {
+    width: 200px;
+    height: 200px;
+    margin: 20px auto;
+    background-color: #ddd;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid #999;
+    display: block;
+}
+
+.touch-area:hover {
+    background-color: #ccc;
+}
+
+.ripple {
+    position: absolute;
+    background: rgba(0, 120, 215, 0.5);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: ripple 0.6s linear;
+    pointer-events: none;
+}
+
+#logon-modal .modal-content {
+    max-width: 500px;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    width: 90%;
+}
+
+#logon-input-display {
+    font-size: 1.8em;
+    margin: 15px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+    min-height: 40px;
+    text-align: right;
+}
+
+#logon-modal .keypad {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 15px;
+}
+
+#logon-modal .btn {
+    padding: 12px;
+    font-size: 1.1em;
+    border-radius: 3px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#logon-modal .btn-danger {
+    background-color: #d9534f;
+    color: white;
+}
+
+#logon-modal .btn-success {
+    background-color: #5cb85c;
+    color: white;
+}
+
+#logon-modal .btn-func {
+    background-color: #0078d7;
+    color: white;
+}
+
+#receipt-modal .modal-content {
+    max-width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    position: relative;
+    box-sizing: border-box;
+    width: 90%;
+}
+
+#receipt-content {
+    margin-bottom: 80px;
+}
+
+#receipt-modal .button-container {
+    position: sticky;
+    bottom: 0;
+    background: #fff;
+    padding: 10px 0;
+    text-align: center;
+    border-top: 1px solid #ccc;
+}
+
+#receipt-modal .btn {
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+#receipt-modal .btn-func {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+#receipt-modal .btn-success {
+    background-color: #28a745;
+    color: #fff;
+}
+
+#receipt-items p {
+    font-size: 0.9em;
+    margin: 5px 0;
+}
+
+#payment-modal .modal-content {
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    position: relative;
+    box-sizing: border-box;
+    width: 90%;
+}
+
+#payment-modal .button-container {
+    position: sticky;
+    bottom: 0;
+    background: #fff;
+    padding: 10px 0;
+    text-align: center;
+    border-top: 1px solid #ccc;
+}
+
+#payment-modal .btn {
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+#touch-screen .btn-danger {
+    background-color: #d9534f;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 10px;
+}
+
+#cash-payment-modal .modal-content {
+    max-width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    position: relative;
+    box-sizing: border-box;
+    width: 90%;
+    text-align: center;
+}
+
+#cash-payment-modal .cash-payment-info {
+    margin-bottom: 15px;
+}
+
+#cash-payment-modal .cash-payment-info p {
+    font-size: 1.1em;
+    margin: 8px 0;
+    text-align: left;
+}
+
+#cash-payment-modal .input-display {
+    font-size: 1.5em;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+    min-height: 40px;
+}
+
+#cash-payment-modal .keypad {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 15px;
+}
+
+#cash-payment-modal .btn {
+    padding: 12px;
+    font-size: 1.1em;
+    border-radius: 3px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#cash-payment-modal .button-container {
+    position: sticky;
+    bottom: 0;
+    background: #fff;
+    padding: 10px 0;
+    text-align: center;
+    border-top: 1px solid #ccc;
+}
+
+@keyframes ripple {
+    0% { transform: scale(0); opacity: 1; }
+    100% { transform: scale(4); opacity: 0; }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+    }
+    
+    .left-panel, .right-panel {
+        width: 100%;
+    }
+    
+    .products-panel {
+        grid-template-columns: repeat(2, 1fr);
+        min-height: 200px;
+    }
+    
+    .header {
+        flex-direction: column;
+        padding: 10px;
+    }
+    
+    .store-info, .datetime {
+        text-align: center;
+        margin-bottom: 5px;
+    }
+    
+    .function-buttons {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5px;
+    }
+    
+    .btn {
+        padding: 12px;
+        font-size: 1em;
+    }
+    
+    table {
+        font-size: 0.9em;
+    }
+    
+    th, td {
+        padding: 8px 5px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        padding: 15px;
+        min-height: 70%;
+    }
+    
+    .payment-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .payment-method-btn {
+        font-size: 0.9em;
+    }
+    
+    .payment-method-btn img {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .touch-area {
+        width: 150px;
+        height: 150px;
+        margin: 15px auto;
+    }
+    
+    #logon-modal .modal-content {
+        max-width: 95%;
+        padding: 15px;
+    }
+
+    #logon-input-display {
+        font-size: 1.5em;
+        margin: 10px 0;
+        min-height: 35px;
+    }
+
+    #logon-modal .keypad {
+        gap: 6px;
+    }
+
+    #logon-modal .btn {
+        padding: 10px;
+        font-size: 1em;
+    }
+    
+    #receipt-modal .modal-content {
+        max-width: 95%;
+        padding: 15px;
+    }
+    
+    #payment-modal .modal-content {
+        max-width: 95%;
+        padding: 15px;
+    }
+    
+    #cash-payment-modal .modal-content {
+        max-width: 95%;
+        padding: 15px;
+    }
+
+    #cash-payment-modal .input-display {
+        font-size: 1.3em;
+        min-height: 35px;
+    }
+
+    #cash-payment-modal .keypad {
+        gap: 6px;
+    }
+
+    #cash-payment-modal .btn {
+        padding: 10px;
+        font-size: 1em;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .products-panel {
+        grid-template-columns: 1fr;
+    }
+    
+    .keypad {
+        grid-template-columns: repeat(4, 1fr);
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 95%;
+        z-index: 1000;
+        display: none;
+    }
+    #input-display.input-display{
+            display: none;
+    }
+    
+    .cart-container {
+        overflow-x: auto;
+        max-height: 200px;
+    }
+    
+    table {
+        font-size: 0.8em;
+        min-width: 450px;
+    }
+    
+    .payment-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .function-buttons {
+        grid-template-columns: 1fr;
+    }
+    
+    .touch-area {
+        width: 140px;
+        height: 140px;
+        margin: 10px auto;
+        background-color: #ccc;
+        border: 3px solid #666;
+    }
+    
+    #manual-entry-btn {
+        display: none;
+    }
+    
+    #discount-btn {
+        display: none;
+    }
+    
+    #logon-modal .modal-content {
+        max-width: 98%;
+        padding: 10px;
+    }
+
+    #logon-input-display {
+        font-size: 1.2em;
+        margin: 8px 0;
+        padding: 8px;
+        min-height: 30px;
+    }
+
+    #logon-modal .keypad {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 5px;
+        display: grid;
+    }
+
+    #logon-modal .btn {
+        padding: 8px;
+        font-size: 0.9em;
+    }
+
+    #logon-modal h2 {
+        font-size: 1.2em;
+        margin: 10px 0;
+    }
+
+    #logon-modal p {
+        font-size: 0.9em;
+    }
+    
+    #receipt-modal .modal-content {
+        max-width: 98%;
+        padding: 10px;
+    }
+    
+    #payment-modal .modal-content {
+        max-width: 98%;
+        padding: 10px;
+    }
+    
+    #cash-payment-modal .modal-content {
+        max-width: 98%;
+        padding: 10px;
+    }
+
+    #cash-payment-modal .input-display {
+        font-size: 1.2em;
+        min-height: 30px;
+    }
+
+    #cash-payment-modal .keypad {
+        gap: 5px;
+    }
+
+    #cash-payment-modal .btn {
+        padding: 8px;
+        font-size: 0.9em;
+    }
+
+    #cash-payment-modal .cash-payment-info p {
+        font-size: 1em;
+    }
+}

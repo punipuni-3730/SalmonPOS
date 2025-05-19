@@ -1,0 +1,14 @@
+[
+    {"id":0,"name":"店長","level":1},
+    {"id":1,"name":"しゃけ","level":1},
+    {"id":2,"name":"桜山","level":1},
+    {"id":3,"name":"東田","level":1},
+    {"id":4,"name":"波川","level":1},
+    {"id":5,"name":"村畑","level":1},
+    {"id":10,"name":"応援者1","level":1},
+    {"id":11,"name":"応援者2","level":1},
+    {"id":12,"name":"応援者3","level":1},
+    {"id":13,"name":"応援者4","level":1},
+    {"id":14,"name":"応援者5","level":1},
+    {"id":999,"name":"ＴＥＣーＳＥ","level":9}
+]
