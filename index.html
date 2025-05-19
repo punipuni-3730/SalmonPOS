@@ -28,6 +28,7 @@
                             <th>商品名</th>
                             <th>単価</th>
                             <th>数量</th>
+                            <th>値引</th>
                             <th>金額</th>
                         </tr>
                     </thead>
@@ -36,6 +37,7 @@
                     <tfoot>
                         <tr class="total-row">
                             <td colspan="4">合計</td>
+                            <td id="item-total"></td>
                             <td id="cart-total">¥0</td>
                         </tr>
                     </tfoot>
@@ -49,6 +51,7 @@
                 <button class="btn" id="manual-entry-btn">モード切替[Space]</button>
                 <button class="btn" id="logoff-btn">責番解除[→]</button>
                 <button class="btn btn-func" id="settlement-btn">精算</button>
+                <button class="btn btn-func" id="log-btn">ログ</button>
             </div>
         </div>
         <div class="right-panel">
@@ -57,6 +60,10 @@
             <div class="products-panel" id="products-panel">
             </div>
             <div class="keypad">
+                <button class="btn btn-func" id="discount-half-btn">半額</button>
+                <button class="btn btn-func" id=""></button>
+                <button class="btn btn-func" id=""></button>
+                <button class="btn btn-func" id=""></button>
                 <button class="btn" id="btn-7">7</button>
                 <button class="btn" id="btn-8">8</button>
                 <button class="btn" id="btn-9">9</button>
@@ -221,6 +228,27 @@
         <div class="button-container">
             <button class="btn btn-success" id="settlement-execute-btn">精算</button>
             <button class="btn btn-danger" id="settlement-confirm-cancel-btn">キャンセル</button>
+        </div>
+    </div>
+</div>
+<div id="log-modal" class="modal">
+    <div class="modal-content">
+        <h2>トランザクションログ</h2>
+        <div id="log-content" style="max-height: 400px; overflow-y: auto;">
+            <table id="log-table">
+                <thead>
+                    <tr>
+                        <th>時刻</th>
+                        <th>操作</th>
+                        <th>詳細</th>
+                        <th>責任者</th>
+                    </tr>
+                </thead>
+                <tbody id="log-items"></tbody>
+            </table>
+        </div>
+        <div class="button-container">
+            <button class="btn btn-danger" id="log-close-btn">閉じる</button>
         </div>
     </div>
 </div>

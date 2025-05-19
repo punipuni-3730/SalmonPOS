@@ -501,7 +501,80 @@ th {
     text-align: center;
     border-top: 1px solid #ccc;
 }
+#log-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
 
+#log-modal .modal-content {
+    background: white;
+    margin: 5% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 800px;
+    border-radius: 5px;
+}
+
+#log-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+#log-table th, #log-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#log-table th {
+    background: #f4f4f4;
+}
+
+#log-table pre {
+    margin: 0;
+    font-size: 12px;
+    white-space: pre-wrap;
+}
+
+#log-content {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.cart table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+.cart th, .cart td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.cart th {
+    background: #f4f4f4;
+}
+
+.cart td:nth-child(6) { /* 値引列 */
+    text-align: center;
+    width: 100px; /* 幅を制限 */
+    color: #d32f2f; /* 割引額を赤で強調 */
+}
+
+.cart-total {
+    text-align: right;
+    font-size: 18px;
+    margin-top: 10px;
+}
 @keyframes ripple {
     0% { transform: scale(0); opacity: 1; }
     100% { transform: scale(4); opacity: 0; }
