@@ -261,19 +261,40 @@ function updateDateTime() {
 }
 
 function loadProducts() {
-    productsPanel.innerHTML = '';
-    products.forEach(product => {
-        const productBtn = document.createElement('div');
-        productBtn.className = 'product-btn';
-        productBtn.innerHTML = `
-            <div class="product-name">${product.name}</div>
-            <div class="product-price">¥${product.price}</div>
-        `;
-        productBtn.addEventListener('click', () => addToCart(product));
-        productsPanel.appendChild(productBtn);
-    });
-}
+    fetch('products.json')
+        .then(response => response.json())
+        .then(products => {
+            const productPanel = document.getElementById('products-panel');
+            productPanel.innerHTML = '';
+            products.forEach(product => {
+                const productBtn = document.createElement('div');
+                productBtn.className = 'product-btn';
+                productBtn.dataset.id = product.id;
 
+                const styles = [];
+                if (product.color) {
+                    if (/^#[0-9A-Fa-f]{6}$|^[a-zA-Z]+$/.test(product.color)) {
+                        styles.push(`background-color: ${product.color}`);
+                    }
+                }
+                if (product.textcolor) {
+                    if (/^#[0-9A-Fa-f]{6}$|^[a-zA-Z]+$/.test(product.textcolor)) {
+                        styles.push(`color: ${product.textcolor}`);
+                    }
+                }
+                if (styles.length > 0) {
+                    productBtn.setAttribute('style', styles.join('; '));
+                }
+
+                productBtn.innerHTML = `
+                    <div class="product-name">${product.name}</div>
+                `;
+                productBtn.addEventListener('click', () => addToCart(product));
+                productPanel.appendChild(productBtn);
+            });
+        })
+        .catch(error => console.error('Error loading products:', error));
+}
 function updateInputDisplay() {
     inputDisplay.textContent = inputValue;
 }
@@ -761,8 +782,10 @@ function processCashSubtotal() {
     }
     window.cashReceived = totalDeposit;
     window.cashChange = totalDeposit - total;
+    cashPaymentModal.style.display = 'none';
     cashChangeAmount.style.display = 'block';
     cashChangeValue.textContent = `¥${window.cashChange}`;
+
     processPayment('Cash');
 }
 

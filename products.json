@@ -1,6 +1,7 @@
 [
     { "id": "0", "name": "100円クーポン", "price": -100 },
-    { "id": "2001", "name": "冷凍ブロッコリー 500g", "price": 158 },
+    {"id":"1","name":"きゅうり","price":33,"color":"GREEN","textcolor":"WHITE"},
+    { "id": "2001", "name": "冷凍ブロッコリー 500g", "price": 158 ,"color": "YELLOW","textcolor": ""},
     { "id": "2002", "name": "冷凍唐揚げ 1kg", "price": 698 },
     { "id": "2003", "name": "ベルギーワッフル（10個入）", "price": 348 },
     { "id": "2004", "name": "チーズインハンバーグ 1kg", "price": 598 },
